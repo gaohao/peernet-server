@@ -20,7 +20,7 @@ function getServerIO(port) {
     return servers[port];
 };
 
-var centralSock = getServerIO(8085);
+var centralSock = getServerIO(80);
 
 centralSock.on('connection', function(socket) {
     console.log("client connected to central server");
