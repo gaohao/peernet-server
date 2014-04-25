@@ -31,12 +31,12 @@ centralSock.on('connection', function(socket) {
         var status = signupAndSendStatus(data.uname,data.email,data.password,socket); 
     });
 
-    socket.on('authenticate', function(username,password) {
+    socket.on('authenticate', function(username,password,ipaddress) {
         redis.get("uname-"+username, function(err, returnedPass) {
             if(password===returnedPass) {
                 socket.emit('auth',"authenticated succesfully!",1);
-                var ipaddress = socket.handshake.address;
-                redis.set("ipofuname-"+username,ipaddress.address);
+                //var ipaddress = socket.handshake.address;
+                redis.set("ipofuname-"+username,ipaddress);
                 redis.set("auth-"+username,1);
                 //redis.set("pubkofuname-"+username);
             } else {
