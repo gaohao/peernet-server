@@ -3,8 +3,8 @@ var clients = { };
 
 var redis_module = require("redis");
 
-var port = 6379;
-var host = 'localhost';
+var port = 10908;
+var host = 'pub-redis-10908.us-east-1-3.3.ec2.garantiadata.com';
 var redis = redis_module.createClient(port,host);
 
 function getServerIO(port) {
