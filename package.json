@@ -18,6 +18,7 @@
   "homepage": "https://github.com/gaohao/peernet-server",
   "dependencies": {
     "redis": "~0.10.1",
-    "socket.io": "~0.9.16"
+    "socket.io": "~0.9.16",
+    "express": "~4.1.0"
   }
 }

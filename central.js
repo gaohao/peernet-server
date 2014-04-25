@@ -1,26 +1,28 @@
+const REDIS_PORT = 10908;
+const REDIS_HOST = 'pub-redis-10908.us-east-1-3.3.ec2.garantiadata.com';
+
 var servers = { };
 var clients = { };
 
 var redis_module = require("redis");
+var redis = redis_module.createClient(REDIS_PORT, REDIS_HOST);
 
-var port = 10908;
-var host = 'pub-redis-10908.us-east-1-3.3.ec2.garantiadata.com';
-var redis = redis_module.createClient(port,host);
+var express = require('express');
+var app = express();
 
-function getServerIO(port) {
-    if (servers[port] == null) {
-        var io = require('socket.io').listen(port);
-        if (io == null) {
-            return null;
-        }
-        console.log("Server started on port " + port);
-        servers[port] = io;
-        return io.sockets;
-    }
-    return servers[port];
-};
+var http = require('http');
+var server = http.createServer(app);
 
-var centralSock = getServerIO(process.env.PORT || 8085);
+var centralSock = require('socket.io').listen(server);
+
+var port = process.env.PORT || 8085;
+server.listen(port);
+console.log("Server started on port " + port);
+
+app.get('/?', function (req, res) {
+    res.writeHead(200, {'Content-Type': 'text/plain'});
+    res.end('Peernet Central Server');
+});
 
 centralSock.on('connection', function(socket) {
     console.log("client connected to central server");
@@ -28,7 +30,6 @@ centralSock.on('connection', function(socket) {
     socket.on('userdata', function(data) {
         var status = signupAndSendStatus(data.uname,data.email,data.password,socket); 
     });
-
 
     socket.on('authenticate', function(username,password) {
         redis.get("uname-"+username, function(err, returnedPass) {
