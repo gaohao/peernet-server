@@ -1,25 +1,23 @@
 {
-  "name": "peernet",
+  "name": "peernet-server",
   "version": "0.0.1",
-  "description": "",
+  "description": "peernet-server ==============",
   "main": "central.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node central.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/gaohao/peernet.git"
+    "url": "https://github.com/gaohao/peernet-server"
   },
   "author": "",
-  "license": "BSD-2-Clause",
+  "license": "ISC",
   "bugs": {
-    "url": "https://github.com/gaohao/peernet/issues"
+    "url": "https://github.com/gaohao/peernet-server/issues"
   },
+  "homepage": "https://github.com/gaohao/peernet-server",
   "dependencies": {
     "redis": "~0.10.1",
-    "async": "~0.7.0",
-    "socket.io-client": "~0.9.16",
     "socket.io": "~0.9.16"
   }
 }
